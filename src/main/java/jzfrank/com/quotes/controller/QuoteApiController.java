@@ -3,9 +3,11 @@ package jzfrank.com.quotes.controller;
 import jzfrank.com.quotes.models.Quote;
 import jzfrank.com.quotes.repository.QuoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/quotes")
@@ -16,5 +18,16 @@ public class QuoteApiController {
     @GetMapping
     public Iterable<Quote> getAllQuotes() {
         return quoteRepository.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<Quote> addQuote(@RequestBody Quote quote) {
+        Quote saved = quoteRepository.save(quote);
+        return new ResponseEntity<>(saved, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteQuote(@PathVariable("id") UUID id) {
+        quoteRepository.deleteById(id);
     }
 }
