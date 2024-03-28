@@ -18,9 +18,7 @@ public class InitialConfiguration {
     ) {
         return args -> {
             List<Quote> quotes = getQuotes();
-            for (Quote quote: quotes) {
-                quoteRepository.save(quote);
-            }
+            quoteRepository.saveAll(quotes);
         };
     }
 
