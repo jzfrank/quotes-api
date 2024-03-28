@@ -6,3 +6,7 @@ Uses:
 - JPA
 - H2
 - Lombok 
+- springdoc open api
+
+## Swagger
+visit `http://localhost:8083/swagger-ui/index.html`
